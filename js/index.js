@@ -76,8 +76,8 @@ button.onclick = function() {
                         Error.innerHTML = '<p class="Errors"> الرقم القومي غير صالح </p>';
                     }
                 } else {
-                    Error.innerHTML =
-                        Error.innerHTML = '<p class="Errors"> الرقم القومي غير صالح </p>';
+                    Error.innerHTML = Error.innerHTML =
+                        '<p class="Errors"> الرقم القومي غير صالح </p>';
                 }
             } else if (input.value.length == 0) {
                 Error.innerHTML = '<p class="Errors">الرجاء إدخال الرقم القومي</p>';
@@ -89,7 +89,7 @@ button.onclick = function() {
             }
         }
     } else {
-        Error.innerHTML = "<p class=\"Errors\">من فضلك املاء المدخلات</p>";
+        Error.innerHTML = '<p class="Errors">من فضلك املاء المدخلات</p>';
     }
 };
 
@@ -98,7 +98,6 @@ body.onload = function() {
         localStorage.clear();
         localStorage.setItem("National_ID", "[]");
     }
-
 };
 let ArrayNums = [];
 let NAME;
@@ -108,13 +107,15 @@ function okFunction() {
     let Storage = JSON.parse(localStorage.getItem("National_ID")).length;
     for (let i = 0; i < Storage; i++) {
         let Num = JSON.parse(localStorage.getItem("National_ID"))[i].Id;
-        ArrayNums.push(Num)
-        bools = (ArrayNums.indexOf(input.value) >= 0) ? false : true;
+        ArrayNums.push(Num);
+        bools = ArrayNums.indexOf(input.value) >= 0 ? false : true;
         console.log(bools);
         // NAME = () ? "no" : JSON.parse(localStorage.getItem("National_ID"))[i].Name;
         if (input.value == Num) {
             console.log();
-            NAME = JSON.parse(localStorage.getItem("National_ID"))[ArrayNums.indexOf(Num)].Name
+            NAME = JSON.parse(localStorage.getItem("National_ID"))[
+                ArrayNums.indexOf(Num)
+            ].Name;
         }
     }
     if (bools) {
@@ -137,13 +138,18 @@ function okFunction() {
             localStorage.getItem("National_ID") != "" ?
             JSON.parse(localStorage.getItem("National_ID")) :
             localStorage.getItem("National_ID");
-        array.push({ "Id": input.value, "Name": text.value });
+        array.push({ Id: input.value, Name: text.value });
         localStorage.setItem("National_ID", JSON.stringify(array));
         tbody.innerHTML = "";
         Show();
         input.value = "";
     } else {
-        Error.innerHTML = "<p dir=\"rtl\"class = \"Errors\">الرقم القومي ده : " + input.value + " مستعمل من قبل وباسم: " + NAME + "</p>"
+        Error.innerHTML =
+            '<p dir="rtl"class = "Errors">الرقم القومي ده : ' +
+            input.value +
+            " مستعمل من قبل وباسم: " +
+            NAME +
+            "</p>";
     }
 
     if (localStorage.getItem("National_ID").length == 2) {
@@ -153,7 +159,7 @@ function okFunction() {
                         <img src=\"images/success.svg\" />
                         <i class="fa fa-close"></i>
                         </div>
-                    <p>تم بنجاح اضافة رقم قومي : ${input.value}</p>        
+                    <p>تم بنجاح اضافة الاسم : ${text.value}</p>    
                 </div>`;
         let I_Hides = document.querySelectorAll(".good i");
         I_Hides.forEach((I_Hide) => {
@@ -166,38 +172,98 @@ function okFunction() {
             localStorage.getItem("National_ID") != "" ?
             JSON.parse(localStorage.getItem("National_ID")) :
             localStorage.getItem("National_ID");
-        array.push({ "Id": input.value, "Name": text.value });
+        array.push({ Id: input.value, Name: text.value });
         localStorage.setItem("National_ID", JSON.stringify(array));
         tbody.innerHTML = "";
         Show();
         input.value = "";
         text.value = "";
     }
-
 }
 
 // 30801052405375
 // 26206202402211
+let Num, EO, Years, history, Governorates, Governorate;
 
 function Show() {
     let Storage = JSON.parse(localStorage.getItem("National_ID")).length;
     for (let i = 0; i < Storage; i++) {
-        let Num = JSON.parse(localStorage.getItem("National_ID"))[i].Id;
-        let EO =
-            Num.slice(Num.length - 2, Num.length - 1) % 2 == 0 ? "انثي" : "ذكر";
-        let Years = Num.slice(0, Num.length - 13) == "2" ? "19" : "20";
-        let history =
+        Num = JSON.parse(localStorage.getItem("National_ID"))[i].Id;
+        EO = Num.slice(Num.length - 2, Num.length - 1) % 2 == 0 ? "انثي" : "ذكر";
+        Years = Num.slice(0, Num.length - 13) == "2" ? "19" : "20";
+        history =
             Years +
             Num.slice(1, Num.length - 11) +
             "/" +
             Num.slice(3, Num.length - 9) +
             "/" +
             Num.slice(5, Num.length - 7);
+        Governorates = Num.slice(7, Num.length - 5);
+        if (Governorates == "01") {
+            Governorate = "القاهرة"
+        } else if (Governorates == "02") {
+            Governorate = "الإسكندرية"
+        } else if (Governorates == "03") {
+            Governorate = "بورسعيد"
+        } else if (Governorates == "04") {
+            Governorate = "السويس"
+        } else if (Governorates == "11") {
+            Governorate = "دمياط"
+        } else if (Governorates == "12") {
+            Governorate = "الدقهلية"
+        } else if (Governorates == "13") {
+            Governorate = "الشرقية"
+        } else if (Governorates == "14") {
+            Governorate = "القليوبية"
+        } else if (Governorates == "15") {
+            Governorate = "كفر الشيخ"
+        } else if (Governorates == "16") {
+            Governorate = "الغربية"
+        } else if (Governorates == "17") {
+            Governorate = "المنوفية"
+        } else if (Governorates == "18") {
+            Governorate = "البحيرة"
+        } else if (Governorates == "19") {
+            Governorate = "الإسماعيلية"
+        } else if (Governorates == "21") {
+            Governorate = "الجيزة"
+        } else if (Governorates == "22") {
+            Governorate = "بني سويف"
+        } else if (Governorates == "23") {
+            Governorate = "الفيوم"
+        } else if (Governorates == "24") {
+            Governorate = "المنيا"
+        } else if (Governorates == "25") {
+            Governorate = "أسيوط"
+        } else if (Governorates == "26") {
+            Governorate = "سوهاج"
+        } else if (Governorates == "27") {
+            Governorate = "قنا"
+        } else if (Governorates == "28") {
+            Governorate = "أسوان"
+        } else if (Governorates == "29") {
+            Governorate = "الأقصر"
+        } else if (Governorates == "31") {
+            Governorate = "البحر الأحمر"
+        } else if (Governorates == "32") {
+            Governorate = "الوادى الجديد"
+        } else if (Governorates == "33") {
+            Governorate = "مطروح"
+        } else if (Governorates == "34") {
+            Governorate = "شمال سيناء"
+        } else if (Governorates == "35") {
+            Governorate = "جنوب سيناء"
+        } else if (Governorates == "88") {
+            Governorate = "خارج الجمهورية"
+        }
         tbody.innerHTML += `
             <tr>
                 <td scope="row">${i + 1}</td>
-                <td>${JSON.parse(localStorage.getItem("National_ID"))[i].Name}</td>
+                <td>${
+                  JSON.parse(localStorage.getItem("National_ID"))[i].Name
+                }</td>
                 <td>${Num}</td>
+                <td>${Governorate}</td>
                 <td>${EO}</td>
                 <td>${history}</td>
             </tr>
@@ -207,32 +273,6 @@ function Show() {
 
 Show();
 
-let Data = [];
-
 function Download() {
-    Data = [];
-    let trs = document.querySelectorAll("table tbody tr")
-    trs.forEach(tr => {
-        let trs = tr.querySelectorAll("td")
-
-        Data.push({ "id": trs[0].innerHTML, "NationalID": trs[1].innerHTML, "Type": trs[2].innerHTML, "birthDay": trs[3].innerHTML })
-    })
-    var json = JSON.stringify(Data);
-
-    $('#Table').tblToExcel();
+    $("#Table").tblToExcel();
 }
-
-
-
-
-// Reomve The Spacing
-// input.replace(/ /g, "")
-// Download JSON FILE
-
-// function download(filename, textInput) {
-// var element = document.createElement('a');
-// element.setAttribute('href', 'data:json/plain;charset=utf-8, ' + encodeURIComponent(textInput));
-// element.setAttribute('download', filename);
-// document.body.appendChild(element);
-// element.click();
-// }
